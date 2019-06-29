@@ -7,6 +7,7 @@ package s2;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 
 /**
  *
@@ -27,7 +28,9 @@ public class DatabaseSeeder {
             int countryId = Country.create("USA");
             int cityId = City.create("Trenton", countryId);
             int addressId = Address.create("123 Somewhere", "", cityId, "08638", "6096666666");
-            Customer.create("Neal", addressId);
+            int customerId = Customer.create("Neal", addressId);
+            long d = System.currentTimeMillis();
+            Appointment.create(customerId, 1, "Appointment 1", "Description", "", "", "", "", new Date(d), new Date(d));
             System.out.println("Seeded customers");
         }
     }
