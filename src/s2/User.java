@@ -15,6 +15,27 @@ import java.sql.SQLException;
  */
 public class User {
 
+    public static boolean login(String userName, String password) {
+        boolean isLoggedIn = false;
+
+        try {
+            PreparedStatement ps = DatabaseQuery.prepare(
+                "SELECT COUNT(*) FROM user WHERE userName = ? AND password = ?"
+            );
+
+            ps.setString(1, userName);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            isLoggedIn = rs.getInt(1) > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return isLoggedIn;
+    }
+
     public static int create(String userName, String password) {
         int id = 0;
 

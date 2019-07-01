@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane prefHeight="500.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s2.FXMLLoginController">
+    <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <Label text="Login" />
+    </HBox>
+
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <GridPane>
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <Label prefWidth="100" text="Username" />
+                <TextField fx:id="userName" promptText="Username" />
+            </HBox>
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                <Label prefWidth="100" text="Password" />
+                <TextField fx:id="password" promptText="Password" />
+            </HBox>
+        </GridPane>
+    </VBox>
+    
+    <HBox spacing="10" alignment="center_right" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <Button text="Login" fx:id="loginButton" onAction="#handleLogin" />
+    </HBox>
+</GridPane>

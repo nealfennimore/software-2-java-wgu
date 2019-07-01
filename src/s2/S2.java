@@ -19,9 +19,10 @@ public class S2 extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
         
         Scene scene = new Scene(root);
+        SceneController.setMain(scene);
 
         S2_i18n.setup();
 
