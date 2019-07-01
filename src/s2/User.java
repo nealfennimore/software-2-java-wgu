@@ -26,8 +26,7 @@ public class User {
             ps.setString(1, userName);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            isLoggedIn = rs.getInt(1) > 0;
+            isLoggedIn = rs.next() && rs.getInt(1) > 0;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
