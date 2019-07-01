@@ -25,4 +25,9 @@ public class SceneLoader {
     public static void loadLogin() throws IOException {
         load("FXMLLogin.fxml");
     }
+
+    @FXML
+    public static void loadDocument() throws IOException {
+        load("FXMLDocument.fxml");
+    }
 }

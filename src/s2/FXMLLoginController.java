@@ -5,6 +5,7 @@
  */
 package s2;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -49,7 +50,7 @@ public class FXMLLoginController implements Initializable {
     }
 
     @FXML
-    private void handleLogin(ActionEvent event) {
+    private void handleLogin(ActionEvent event) throws IOException {
         String user = userName.getText();
         String pass = password.getText();
 
@@ -62,7 +63,7 @@ public class FXMLLoginController implements Initializable {
         System.out.println(isLoggedIn);
 
         if (isLoggedIn) {
-            
+            SceneLoader.loadDocument();
         } else {
             alertBadLogin();
         }
