@@ -22,6 +22,9 @@ public class S2 extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
+
+        S2_i18n.setup();
+
         Database.setup();
         DatabaseSeeder.seed();
         
