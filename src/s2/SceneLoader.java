@@ -30,4 +30,9 @@ public class SceneLoader {
     public static void loadCustomer() throws IOException {
         load("FXMLCustomer.fxml");
     }
+
+    @FXML
+    public static void loadCustomerCreate() throws IOException {
+        load("FXMLCustomerCreate.fxml");
+    }
 }

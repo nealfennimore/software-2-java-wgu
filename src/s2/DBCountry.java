@@ -32,6 +32,23 @@ public class DBCountry {
         return rs;
     }
 
+    public static ResultSet getByCountry(String country) {
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = DatabaseQuery.prepare("SELECT * FROM country WHERE country = ?");
+
+            ps.setString(1, country);
+            rs = ps.executeQuery();
+            rs.first();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return rs;
+    }
+
     public static int create(String country) {
         int id = 0;
 
@@ -45,6 +62,23 @@ public class DBCountry {
             ResultSet rs = DatabaseQuery.select("SELECT LAST_INSERT_ID() FROM country");
             id = rs.getInt(1);
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return id;
+    }
+
+    public static int createOrSelect(String country) {
+        int id = 0;
+
+        try {
+            ResultSet rs = DBCountry.getByCountry(country);
+            if ( rs.first() ){
+                id = rs.getInt(1);
+            } else {
+                id = DBCountry.create(country);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

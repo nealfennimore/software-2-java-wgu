@@ -32,6 +32,23 @@ public class DBCity {
         return rs;
     }
 
+    public static ResultSet getByCity(String city) {
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = DatabaseQuery.prepare("SELECT * FROM city WHERE city = ?");
+
+            ps.setString(1, city);
+            rs = ps.executeQuery();
+            rs.first();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return rs;
+    }
+
     public static int create(String city, int countryId) {
         int id = 0;
 
@@ -46,6 +63,23 @@ public class DBCity {
             ResultSet rs = DatabaseQuery.select("SELECT LAST_INSERT_ID() FROM city");
             id = rs.getInt(1);
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return id;
+    }
+
+    public static int createOrSelect(String city, int countryId) {
+        int id = 0;
+
+        try {
+            ResultSet rs = DBCity.getByCity(city);
+            if (rs.first()) {
+                id = rs.getInt(1);
+            } else {
+                id = DBCity.create(city, countryId);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

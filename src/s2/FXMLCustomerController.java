@@ -49,7 +49,7 @@ public class FXMLCustomerController implements Initializable {
 
     @FXML
     private void handleCustomerCreate(ActionEvent event) throws IOException {
-        // TODO: Load create screen
+        SceneLoader.loadCustomerCreate();
     }
 
     @FXML
