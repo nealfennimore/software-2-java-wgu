@@ -5,7 +5,7 @@
  */
 package s2;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -23,17 +23,17 @@ public class Appointment {
     private String contact;
     private String type;
     private String url;
-    private Date start;
-    private Date end;
+    private Timestamp start;
+    private Timestamp end;
     private Customer customer;
     private User user;
 
     public Appointment() throws SQLException {
-        this(0, 0, 0, "", "", "", "", "", "", new Date(System.currentTimeMillis()), 
-                new Date(System.currentTimeMillis()));
+        this(0, 0, 0, "", "", "", "", "", "", new Timestamp(System.currentTimeMillis()), 
+                new Timestamp(System.currentTimeMillis()));
     }
 
-    public Appointment(int appointmentId, int customerId, int userId, String title, String description, String location, String contact, String type, String url, Date start, Date end) throws SQLException {
+    public Appointment(int appointmentId, int customerId, int userId, String title, String description, String location, String contact, String type, String url, Timestamp start, Timestamp end) throws SQLException {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
         this.userId = userId;
@@ -195,27 +195,27 @@ public class Appointment {
     /**
      * @return the start
      */
-    public Date getStart() {
+    public Timestamp getStart() {
         return start;
     }
 
     /**
      * @param start the start to set
      */
-    public void setStart(Date start) {
+    public void setStart(Timestamp start) {
         this.start = start;
     }
 
     /**
      * @return the end
      */
-    public Date getEnd() {
+    public Timestamp getEnd() {
         return end;
     }
     /**
      * @param end the end to set
      */
-    public void setEnd(Date end) {
+    public void setEnd(Timestamp end) {
         this.end = end;
     }
 

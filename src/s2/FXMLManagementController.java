@@ -155,7 +155,7 @@ public class FXMLManagementController implements Initializable {
             renderCustomers();
             renderAppointments();
         } catch (SQLException ex) {
-            Logger.getLogger(FXMLCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXMLManagementController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

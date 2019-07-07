@@ -7,7 +7,7 @@ package s2;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -30,7 +30,7 @@ public class DatabaseSeeder {
             int addressId = DBAddress.create("123 Somewhere", "", cityId, "08638", "6096666666");
             int customerId = DBCustomer.create("Neal", addressId);
             long d = System.currentTimeMillis();
-            DBAppointment.create(customerId, 1, "Appointment 1", "Description", "", "", "", "", new Date(d), new Date(d));
+            DBAppointment.create(customerId, 1, "Appointment 1", "Description", "", "", "", "", new Timestamp(d), new Timestamp(d));
             System.out.println("Seeded customers");
         }
     }

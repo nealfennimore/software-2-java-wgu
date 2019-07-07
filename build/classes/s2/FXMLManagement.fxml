@@ -10,7 +10,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <GridPane 
-   fx:controller="s2.FXMLCustomerController" xmlns:fx="http://javafx.com/fxml/1" 
+   fx:controller="s2.FXMLManagementController" xmlns:fx="http://javafx.com/fxml/1" 
    alignment="CENTER" hgap="10" vgap="10"> 
     <padding>
     </padding>
@@ -43,11 +43,11 @@
         <center>
             <TableView fx:id="appointments">
                 <columns>
-                    <TableColumn text="title" fx:id="title">
+                    <TableColumn text="Appointment" fx:id="title">
                     </TableColumn>
-                    <TableColumn text="start" fx:id="start"> 
+                    <TableColumn text="Start" fx:id="start"> 
                     </TableColumn>
-                    <TableColumn text="end" fx:id="end"> 
+                    <TableColumn text="End" fx:id="end"> 
                     </TableColumn>
                </columns> 
             </TableView>

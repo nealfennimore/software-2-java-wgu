@@ -33,8 +33,8 @@ public class AppointmentList {
                 rs.getString("contact"),
                 rs.getString("type"),
                 rs.getString("url"),
-                rs.getDate("start"),
-                rs.getDate("end")
+                rs.getTimestamp("start"),
+                rs.getTimestamp("end")
             );      
             appointments.add(apointment);
         }

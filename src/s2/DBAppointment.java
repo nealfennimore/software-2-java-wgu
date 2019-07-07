@@ -8,7 +8,7 @@ package s2;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -37,7 +37,7 @@ public class DBAppointment {
         return DatabaseQuery.select("SELECT * FROM appointment");
     }
 
-    public static int create(int customerId, int userId, String title, String description, String location, String contact, String type, String url, Date start, Date end ) {
+    public static int create(int customerId, int userId, String title, String description, String location, String contact, String type, String url, Timestamp start, Timestamp end ) {
         int id = 0;
 
         try {
@@ -52,8 +52,8 @@ public class DBAppointment {
             ps.setString(6, contact);
             ps.setString(7, type);
             ps.setString(8, url);
-            ps.setDate(9, start);
-            ps.setDate(10, end);
+            ps.setTimestamp(9, start);
+            ps.setTimestamp(10, end);
             ps.execute();
 
             ResultSet rs = DatabaseQuery.select("SELECT LAST_INSERT_ID() FROM appointment");
@@ -67,7 +67,7 @@ public class DBAppointment {
     }
 
     public static boolean update(int appointmentId, int customerId, int userId, String title, String description,
-            String location, String contact, String type, String url, Date start, Date end) {
+            String location, String contact, String type, String url, Timestamp start, Timestamp end) {
         boolean hasUpdated = false;
 
         try {
@@ -83,8 +83,8 @@ public class DBAppointment {
             ps.setString(6, contact);
             ps.setString(7, type);
             ps.setString(8, url);
-            ps.setDate(9, start);
-            ps.setDate(10, end);
+            ps.setTimestamp(9, start);
+            ps.setTimestamp(10, end);
             ps.setInt(11, appointmentId);
             ps.execute();
             hasUpdated = ps.getUpdateCount() > 0;

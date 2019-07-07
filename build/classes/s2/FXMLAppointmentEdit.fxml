@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s2.FXMLAppointmentEditController">
+    <center>
+        <GridPane alignment="CENTER" hgap="10" vgap="10">
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label prefWidth="100" text="Title" />
+                <TextField fx:id="title" promptText="Title" />
+            </HBox>
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <Label prefWidth="100" text="Description" />
+                <TextField fx:id="description" promptText="Description" />
+            </HBox>
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                <Label prefWidth="100" text="Location" />
+                <TextField fx:id="location" promptText="Location" />
+            </HBox>
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                <Label prefWidth="100" text="Contact" />
+                <TextField fx:id="contact" promptText="Contact" />
+            </HBox>
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                <Label prefWidth="50" text="Type" />
+                <TextField fx:id="type" promptText="Type" />
+            </HBox>
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                <Label prefWidth="50" text="URL" />
+                <TextField fx:id="url" promptText="URL" />
+            </HBox>
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="7">
+                <Label prefWidth="50" text="Start" />
+                <TextField fx:id="start" promptText="" />
+            </HBox>
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="8">
+                <Label prefWidth="50" text="End" />
+                <TextField fx:id="end" promptText="" />
+            </HBox>
+            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="9">
+                <Label prefWidth="50" text="Customers" />
+                <ChoiceBox fx:id="customers" />
+            </HBox>
+        </GridPane>
+    </center>
+    <bottom>
+        <HBox spacing="10" alignment="bottom_right">
+            <Button text="Save" fx:id="saveButton" onAction="#handleSave" />
+            <Button text="Cancel" fx:id="cancelButton" onAction="#handleCancel" />
+        </HBox>
+    </bottom>
+</BorderPane>
