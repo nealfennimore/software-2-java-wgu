@@ -57,7 +57,7 @@ public class FXMLCustomerController implements Initializable {
         Customer customer = getSelectedCustomer();
         if (customer != null) {
             StateManager.setActiveCustomer(customer);
-            // TODO: Load update screen
+            SceneLoader.loadCustomerEdit();
         }
     }
 

@@ -62,7 +62,7 @@ public class DBAddress {
 
         try {
             PreparedStatement ps = DatabaseQuery.prepare(
-                "UPDATE address SET addressName = ?, addressId = ?, cityId = ?, postalCode = ?, phone = ?, lastUpdate = now() WHERE addressId = ?"
+                "UPDATE address SET address = ?, address2 = ?, cityId = ?, postalCode = ?, phone = ?, lastUpdate = now() WHERE addressId = ?"
             );
 
             ps.setString(1, address);
