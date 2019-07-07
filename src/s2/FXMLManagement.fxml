@@ -10,12 +10,12 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <GridPane 
-   fx:controller="s2.FXMLCustomerController" xmlns:fx="http://javafx.com/fxml/1" 
+   fx:controller="s2.FXMLManagementController" xmlns:fx="http://javafx.com/fxml/1" 
    alignment="CENTER" hgap="10" vgap="10"> 
     <padding>
     </padding>
     
-    <Label text="Customer Management"                
+    <Label text="Management"                
         GridPane.columnIndex="0" GridPane.rowIndex="0">
     </Label>
     <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="1">
@@ -36,6 +36,27 @@
                 <Button text="Create" onAction="#handleCustomerCreate" />
                 <Button text="Update" onAction="#handleCustomerUpdate" />
                 <Button text="Set Inactive" onAction="#handleCustomerDelete" />
+            </HBox>
+        </bottom>
+    </BorderPane>
+    <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <center>
+            <TableView fx:id="appointments">
+                <columns>
+                    <TableColumn text="Appointment" fx:id="title">
+                    </TableColumn>
+                    <TableColumn text="Start" fx:id="start"> 
+                    </TableColumn>
+                    <TableColumn text="End" fx:id="end"> 
+                    </TableColumn>
+               </columns> 
+            </TableView>
+        </center>
+        <bottom>
+            <HBox spacing="10" alignment="top_right"> 
+                <Button text="Create" onAction="#handleAppointmentCreate" />
+                <Button text="Update" onAction="#handleAppointmentUpdate" />
+                <Button text="Delete" onAction="#handleAppointmentDelete" />
             </HBox>
         </bottom>
     </BorderPane>

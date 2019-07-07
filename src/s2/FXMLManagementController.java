@@ -28,7 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  *
  * @author neal
  */
-public class FXMLCustomerController implements Initializable {
+public class FXMLManagementController implements Initializable {
     @FXML
     private TableView<Customer> customers;
     @FXML
@@ -38,13 +38,32 @@ public class FXMLCustomerController implements Initializable {
     @FXML
     private TableColumn<Customer, String> active;
 
+
+    @FXML
+    private TableView<Appointment> appointments;
+    @FXML
+    private TableColumn<Appointment, String> title;
+    @FXML
+    private TableColumn<Appointment, String> start;
+    @FXML
+    private TableColumn<Appointment, String> end;
+
     private Customer getSelectedCustomer() {
         return customers.getSelectionModel().getSelectedItem();
+    }
+
+    private Appointment getSelectedAppointment() {
+        return appointments.getSelectionModel().getSelectedItem();
     }
 
     private void renderCustomers() throws SQLException {
         ObservableList items = CustomerList.getTabulated();
         customers.setItems(items);
+    }
+
+    private void renderAppointments() throws SQLException {
+        ObservableList items = AppointmentList.getTabulated();
+        appointments.setItems(items);
     }
 
     @FXML
@@ -82,7 +101,43 @@ public class FXMLCustomerController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
 
+    @FXML
+    private void handleAppointmentCreate(ActionEvent event) throws IOException {
+        SceneLoader.loadAppointmentCreate();
+    }
+
+    @FXML
+    private void handleAppointmentUpdate(ActionEvent event) throws IOException {
+        Appointment appointment = getSelectedAppointment();
+        if (appointment != null) {
+            StateManager.setActiveAppointment(appointment);
+            SceneLoader.loadAppointmentEdit();
+        }
+    }
+
+    @FXML
+    private void handleAppointmentDelete(ActionEvent event) {
+        Appointment appontment = getSelectedAppointment();
+
+        try {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setContentText("Do you want to delete this appointment?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() != ButtonType.OK) {
+                throw new Exception("Cancelled.");
+            } else if (appontment == null) {
+                throw new Exception("No appointment");
+            }
+            DBAppointment.delete(appontment.getAppointmentId());
+            renderAppointments();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -93,8 +148,12 @@ public class FXMLCustomerController implements Initializable {
         customerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         active.setCellValueFactory(new PropertyValueFactory<>("active"));
+        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        start.setCellValueFactory(new PropertyValueFactory<>("start"));
+        end.setCellValueFactory(new PropertyValueFactory<>("end"));
         try {
             renderCustomers();
+            renderAppointments();
         } catch (SQLException ex) {
             Logger.getLogger(FXMLCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }

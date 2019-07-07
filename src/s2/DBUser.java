@@ -35,6 +35,23 @@ public class DBUser {
         return isLoggedIn;
     }
 
+    public static ResultSet get(int userId) {
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = DatabaseQuery.prepare("SELECT * FROM user WHERE userId = ?");
+
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            rs.first();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return rs;
+    }
+
     public static int create(String userName, String password) {
         int id = 0;
 

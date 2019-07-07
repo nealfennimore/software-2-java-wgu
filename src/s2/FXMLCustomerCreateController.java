@@ -59,7 +59,7 @@ public class FXMLCustomerCreateController implements Initializable {
             customerName.getText(),
             addressId
         );
-        SceneLoader.loadCustomer();
+        SceneLoader.loadManagement();
     }
 
     @FXML
@@ -75,7 +75,7 @@ public class FXMLCustomerCreateController implements Initializable {
             if (result.get() != ButtonType.OK) {
                 throw new Exception("Cancelled.");
             }
-            SceneLoader.loadCustomer();
+            SceneLoader.loadManagement();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -4,16 +4,13 @@
  * and open the template in the editor.
  */
 package s2;
-
-import java.sql.ResultSet;
-
 /**
  *
  * @author neal
  */
 public class StateManager {
     private static Customer activeCustomer = null;
-    private static ResultSet activeAppointment = null;
+    private static Appointment activeAppointment = null;
 
     /**
      * @return the activeCustomer
@@ -32,14 +29,14 @@ public class StateManager {
     /**
      * @return the activeAppointment
      */
-    public static ResultSet getActiveAppointment() {
+    public static Appointment getActiveAppointment() {
         return activeAppointment;
     }
 
     /**
      * @param activeAppointment the activeAppointment to set
      */
-    public static void setActiveAppointment(ResultSet activeAppointment) {
+    public static void setActiveAppointment(Appointment activeAppointment) {
         StateManager.activeAppointment = activeAppointment;
     }
 }

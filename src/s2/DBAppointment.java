@@ -16,6 +16,27 @@ import java.sql.Date;
  */
 public class DBAppointment {
 
+    public static ResultSet get(int appointmentId) {
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = DatabaseQuery.prepare("SELECT * FROM appointment WHERE appointmentId = ?");
+
+            ps.setInt(1, appointmentId);
+            rs = ps.executeQuery();
+            rs.first();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return rs;
+    }
+
+    public static ResultSet getAll() {
+        return DatabaseQuery.select("SELECT * FROM appointment");
+    }
+
     public static int create(int customerId, int userId, String title, String description, String location, String contact, String type, String url, Date start, Date end ) {
         int id = 0;
 

@@ -27,8 +27,8 @@ public class SceneLoader {
     }
 
     @FXML
-    public static void loadCustomer() throws IOException {
-        load("FXMLCustomer.fxml");
+    public static void loadManagement() throws IOException {
+        load("FXMLManagement.fxml");
     }
 
     @FXML
@@ -39,5 +39,15 @@ public class SceneLoader {
     @FXML
     public static void loadCustomerEdit() throws IOException {
         load("FXMLCustomerEdit.fxml");
+    }
+
+    @FXML
+    public static void loadAppointmentCreate() throws IOException {
+        load("FXMLAppointmentCreate.fxml");
+    }
+
+    @FXML
+    public static void loadAppointmentEdit() throws IOException {
+        load("FXMLAppointmentEdit.fxml");
     }
 }

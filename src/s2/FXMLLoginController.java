@@ -63,7 +63,7 @@ public class FXMLLoginController implements Initializable {
         System.out.println(isLoggedIn);
 
         if (isLoggedIn) {
-            SceneLoader.loadCustomer();
+            SceneLoader.loadManagement();
         } else {
             alertBadLogin();
         }
