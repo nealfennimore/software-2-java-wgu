@@ -5,70 +5,49 @@
  */
 package s2;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 /**
  *
  * @author neal
  */
 public class Country {
 
-    public static int create(String country) {
-        int id = 0;
+    private int countryId;
+    private String country;
 
-        try {
-            PreparedStatement ps = DatabaseQuery.prepare(
-                    "INSERT INTO country (country, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (?, now(), 'test', now(), 'test')");
-
-            ps.setString(1, country);
-            ps.execute();
-
-            ResultSet rs = DatabaseQuery.select("SELECT LAST_INSERT_ID() FROM country");
-            id = rs.getInt(1);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return id;
+    public Country() {
+        this(0, "Country");
     }
 
-    public static boolean update(int countryId, String country) {
-        boolean hasUpdated = false;
-
-        try {
-            PreparedStatement ps = DatabaseQuery.prepare(
-                    "UPDATE country SET country = ?, lastUpdate = now() WHERE countryId = ?");
-
-            ps.setString(1, country);
-            ps.setInt(2, countryId);
-            ps.execute();
-            hasUpdated = ps.getUpdateCount() > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return hasUpdated;
+    public Country(int countryId, String country) {
+        this.countryId = countryId;
+        this.country = country;
     }
 
-    public static boolean delete(int countryId) {
-        boolean hasDeleted = false;
-
-        try {
-            PreparedStatement ps = DatabaseQuery.prepare("DELETE FROM country WHERE countryId = ?");
-
-            ps.setInt(1, countryId);
-            ps.execute();
-            hasDeleted = ps.getUpdateCount() > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return hasDeleted;
+    /**
+     * @return the countryId
+     */
+    public int getCountryId() {
+        return countryId;
     }
 
+    /**
+     * @param countryId the countryId to set
+     */
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
+    }
+
+    /**
+     * @return the country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * @param country the country to set
+     */
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }

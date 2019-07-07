@@ -5,7 +5,6 @@
  */
 package s2;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,66 +14,102 @@ import java.sql.SQLException;
  */
 public class Customer {
 
-    public static int create(String customerName, int addressId ) {
-        int id = 0;
+    private int customerId;
+    private String customerName;
+    private int addressId;
+    private int active;
+    private Address address;
 
-        try {   
-            PreparedStatement ps = DatabaseQuery.prepare(
-                "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (?, ?, 1, now(), 'test', now(), 'test')"
-            );
-
-            ps.setString(1, customerName);
-            ps.setInt(2, addressId);
-            ps.execute();
-            
-            ResultSet rs = DatabaseQuery.select("SELECT LAST_INSERT_ID() FROM customer");
-            id = rs.getInt(1);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return id;
+    public Customer() throws SQLException {
+        this(0, "Customer", 0, 1);
     }
 
-    public static boolean update(int customerId, String customerName, int addressId ) {
-        boolean hasUpdated = false;
+    public Customer(int customerId, String customerName, int addressId, int active) throws SQLException {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.addressId = addressId;
+        this.active = active;
 
-        try {   
-            PreparedStatement ps = DatabaseQuery.prepare(
-                "UPDATE customer SET customerName = ?, addressId = ?, lastUpdate = now() WHERE customerId = ?"
-            );
-
-            ps.setString(1, customerName);
-            ps.setInt(2, addressId);
-            ps.setInt(3, customerId);
-            ps.execute();
-            hasUpdated = ps.getUpdateCount() > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return hasUpdated;
+        ResultSet rs = DBAddress.get(addressId);
+        Address address = new Address(
+            addressId,
+            rs.getString("address"),
+            rs.getString("address2"),
+            rs.getInt("cityId"),
+            rs.getString("postalCode"),
+            rs.getString("phone")
+        );
+        this.setAddress(address);
     }
 
-    public static boolean delete(int customerId ) {
-        boolean hasDeleted = false;
-
-        try {   
-            PreparedStatement ps = DatabaseQuery.prepare(
-                "DELETE FROM customer WHERE customerId = ?"
-            );
-
-            ps.setInt(1, customerId);
-            ps.execute();
-            hasDeleted = ps.getUpdateCount() > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return hasDeleted;
+    /**
+     * @return the customerId
+     */
+    public int getCustomerId() {
+        return customerId;
     }
 
+    /**
+     * @param customerId the customerId to set
+     */
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    /**
+     * @return the customerName
+     */
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    /**
+     * @param customerName the customerName to set
+     */
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    /**
+     * @return the addressId
+     */
+    public int getAddressId() {
+        return addressId;
+    }
+
+    /**
+     * @param addressId the addressId to set
+     * @throws SQLException
+     */
+    public void setAddressId(int addressId) throws SQLException {
+        this.addressId = addressId;;
+    }
+
+    /**
+     * @return the active
+     */
+    public int getActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    /**
+     * @return the address
+     */
+    public Address getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }

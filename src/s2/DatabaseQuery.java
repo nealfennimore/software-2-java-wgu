@@ -11,6 +11,8 @@ public class DatabaseQuery {
     private static int mutate( String query ) {
         int rs = 0;
 
+        System.out.println(query);
+
         try {
             Connection conn = Database.getConnection();
             Statement stmt = conn.createStatement();
@@ -43,6 +45,8 @@ public class DatabaseQuery {
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
 
+            System.out.println(query);
+
             while (rs.next()) {
                 String line = rs.getString(1);
                 System.out.println(line);
@@ -59,6 +63,8 @@ public class DatabaseQuery {
 
     public static PreparedStatement prepare( String query ) {
         PreparedStatement ps = null;
+
+        System.out.println(query);
 
         try {
             Connection conn = Database.getConnection();

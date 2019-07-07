@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<GridPane 
+   fx:controller="s2.FXMLCustomerController" xmlns:fx="http://javafx.com/fxml/1" 
+   alignment="CENTER" hgap="10" vgap="10"> 
+    <padding>
+    </padding>
+    
+    <Label text="Customer Management"                
+        GridPane.columnIndex="0" GridPane.rowIndex="0">
+    </Label>
+    <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <center>
+            <TableView fx:id="customers">
+                <columns>
+                    <TableColumn text="Customer ID" fx:id="customerId">
+                    </TableColumn>
+                    <TableColumn text="Customer Name" fx:id="customerName"> 
+                    </TableColumn>
+                    <TableColumn text="Active" fx:id="active">
+                    </TableColumn>
+               </columns> 
+            </TableView>
+        </center>
+        <bottom>
+            <HBox spacing="10" alignment="top_right"> 
+                <Button text="Create" onAction="#handleCustomerCreate" />
+                <Button text="Update" onAction="#handleCustomerUpdate" />
+                <Button text="Set Inactive" onAction="#handleCustomerDelete" />
+            </HBox>
+        </bottom>
+    </BorderPane>
+</GridPane>

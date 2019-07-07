@@ -59,11 +59,11 @@ public class FXMLLoginController implements Initializable {
             return;
         }
 
-        boolean isLoggedIn = User.login(user, pass);
+        boolean isLoggedIn = DBUser.login(user, pass);
         System.out.println(isLoggedIn);
 
         if (isLoggedIn) {
-            SceneLoader.loadDocument();
+            SceneLoader.loadCustomer();
         } else {
             alertBadLogin();
         }

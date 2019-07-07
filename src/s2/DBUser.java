@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author neal
  */
-public class User {
+public class DBUser {
 
     public static boolean login(String userName, String password) {
         boolean isLoggedIn = false;

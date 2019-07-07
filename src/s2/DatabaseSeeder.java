@@ -25,12 +25,12 @@ public class DatabaseSeeder {
         int size = rs.getInt(1);
 
         if (size == 0){
-            int countryId = Country.create("USA");
-            int cityId = City.create("Trenton", countryId);
-            int addressId = Address.create("123 Somewhere", "", cityId, "08638", "6096666666");
-            int customerId = Customer.create("Neal", addressId);
+            int countryId = DBCountry.create("USA");
+            int cityId = DBCity.create("Trenton", countryId);
+            int addressId = DBAddress.create("123 Somewhere", "", cityId, "08638", "6096666666");
+            int customerId = DBCustomer.create("Neal", addressId);
             long d = System.currentTimeMillis();
-            Appointment.create(customerId, 1, "Appointment 1", "Description", "", "", "", "", new Date(d), new Date(d));
+            DBAppointment.create(customerId, 1, "Appointment 1", "Description", "", "", "", "", new Date(d), new Date(d));
             System.out.println("Seeded customers");
         }
     }
@@ -40,7 +40,7 @@ public class DatabaseSeeder {
         int size = rs.getInt(1);
 
         if (size == 0) {
-            User.create("test", "test");
+            DBUser.create("test", "test");
             System.out.println("Seeded users");
         }
     }

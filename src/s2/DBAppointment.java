@@ -14,7 +14,7 @@ import java.sql.Date;
  *
  * @author neal
  */
-public class Appointment {
+public class DBAppointment {
 
     public static int create(int customerId, int userId, String title, String description, String location, String contact, String type, String url, Date start, Date end ) {
         int id = 0;
