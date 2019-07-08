@@ -37,6 +37,26 @@ public class DBAppointment {
         return DatabaseQuery.select("SELECT * FROM appointment");
     }
 
+    public static ResultSet getByDateRange(Timestamp start, Timestamp end){
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = DatabaseQuery.prepare(
+                "SELECT * FROM appointment WHERE start >= ? AND end <= ?"
+            );
+
+            ps.setTimestamp(1, start);
+            ps.setTimestamp(2, end);
+            rs = ps.executeQuery();
+            rs.first();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return rs;
+    }
+
     public static int create(int customerId, int userId, String title, String description, String location, String contact, String type, String url, Timestamp start, Timestamp end ) {
         int id = 0;
 

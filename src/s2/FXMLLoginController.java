@@ -7,8 +7,11 @@ package s2;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -72,6 +75,24 @@ public class FXMLLoginController implements Initializable {
     }
 
     @FXML
+    private void handleAppointmentWithin15Minutes() {
+        LocalDateTime startDate = LocalDateTime.now();
+        LocalDateTime endDate = startDate.plusMinutes(15);
+        ResultSet result = DBAppointment.getByDateRange(Timestamp.valueOf(startDate), Timestamp.valueOf(endDate));
+
+        try {
+            if (result.first()) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Appointment");
+                alert.setContentText("You have an appointment within 15 minutes.");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
     private void handleLogin(ActionEvent event) throws IOException {
         String user = userName.getText();
         String pass = password.getText();
@@ -82,10 +103,10 @@ public class FXMLLoginController implements Initializable {
         }
 
         boolean isLoggedIn = DBUser.login(user, pass);
-        System.out.println(isLoggedIn);
         reportUserLogin(user);  
 
         if (isLoggedIn) {
+            handleAppointmentWithin15Minutes();
             SceneLoader.loadManagement();
         } else {
             alertBadLogin();
