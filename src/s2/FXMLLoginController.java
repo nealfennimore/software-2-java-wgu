@@ -8,12 +8,17 @@ package s2;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;   
 
 /**
  * FXML Controller class
@@ -49,6 +54,23 @@ public class FXMLLoginController implements Initializable {
         }
     }
 
+    private void reportUserLogin(String user) {
+        Logger logger = Logger.getLogger("log.txt");
+
+        try {
+            FileHandler fh = new FileHandler("log.txt", true);
+            SimpleFormatter sf = new SimpleFormatter();
+            fh.setFormatter(sf);
+            logger.addHandler(fh);
+            logger.setLevel(Level.INFO);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        } catch (SecurityException ex) {
+            System.out.println(ex.getMessage());
+        }
+        logger.log(Level.INFO, String.format("User logged in: %s", user));
+    }
+
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
         String user = userName.getText();
@@ -61,6 +83,7 @@ public class FXMLLoginController implements Initializable {
 
         boolean isLoggedIn = DBUser.login(user, pass);
         System.out.println(isLoggedIn);
+        reportUserLogin(user);  
 
         if (isLoggedIn) {
             SceneLoader.loadManagement();

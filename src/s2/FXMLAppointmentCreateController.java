@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -17,17 +16,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.HBox;
 import javafx.util.StringConverter;
 
 /**
