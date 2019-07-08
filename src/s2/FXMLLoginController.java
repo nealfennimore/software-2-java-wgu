@@ -78,13 +78,27 @@ public class FXMLLoginController implements Initializable {
     private void handleAppointmentWithin15Minutes() {
         LocalDateTime startDate = LocalDateTime.now();
         LocalDateTime endDate = startDate.plusMinutes(15);
-        ResultSet result = DBAppointment.getByDateRange(Timestamp.valueOf(startDate), Timestamp.valueOf(endDate));
+        ResultSet rs = DBAppointment.getByDateRange(Timestamp.valueOf(startDate), Timestamp.valueOf(endDate));
 
         try {
-            if (result.first()) {
+            if (rs.first()) {
+                Appointment appointment = new Appointment(
+                    rs.getInt("appointmentId"),
+                    rs.getInt("customerId"),
+                    rs.getInt("userId"),
+                    rs.getString("title"),
+                    rs.getString("description"),
+                    rs.getString("location"),
+                    rs.getString("contact"),
+                    rs.getString("type"),
+                    rs.getString("url"),
+                    rs.getTimestamp("start"),
+                    rs.getTimestamp("end")
+                );
+                Customer customer = appointment.getCustomer();
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Appointment");
-                alert.setContentText("You have an appointment within 15 minutes.");
+                alert.setContentText(String.format("You have a meeting with %s", customer.getCustomerName()));
                 alert.showAndWait();
             }
         } catch (SQLException e) {
