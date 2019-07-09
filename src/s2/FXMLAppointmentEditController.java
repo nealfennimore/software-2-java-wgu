@@ -76,21 +76,41 @@ public class FXMLAppointmentEditController implements Initializable {
     private void handleSave(ActionEvent event) throws IOException {
         Appointment appointment = StateManager.getActiveAppointment();
 
-        DBAppointment.update(
-            appointment.getAppointmentId(),
-            getSelectedCustomer().getCustomerId(),
-            1,
-            title.getText(),
-            description.getText(),
-            location.getText(),
-            contact.getText(),
-            type.getText(),
-            url.getText(),
-            Timestamp.valueOf(start.getText()),
-            Timestamp.valueOf(end.getText())
-        );
+        LocalDateTime startDateTime = Timestamp.valueOf( start.getText() ).toLocalDateTime();
+        LocalDateTime endDateTime = Timestamp.valueOf( end.getText() ).toLocalDateTime();
 
-        SceneLoader.loadManagement();
+        boolean isWithinBusinessHours = ScheduleValidator.isWithinBusinessHours(startDateTime, endDateTime);
+        boolean hasOverlappingAppointments = ScheduleValidator.hasOverlappingAppointments(startDateTime, endDateTime);
+
+        if ( ! isWithinBusinessHours ){
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("Appointment is not within business hours.");
+
+            alert.showAndWait();
+        } else if ( hasOverlappingAppointments ) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("Schedule conflict with another appointment.");
+
+            alert.showAndWait();
+        } else {
+            DBAppointment.update(
+                appointment.getAppointmentId(),
+                getSelectedCustomer().getCustomerId(),
+                1,
+                title.getText(),
+                description.getText(),
+                location.getText(),
+                contact.getText(),
+                type.getText(),
+                url.getText(),
+                Timestamp.valueOf(start.getText()),
+                Timestamp.valueOf(end.getText())
+            );
+
+            SceneLoader.loadManagement();
+        }
     }
 
     @FXML

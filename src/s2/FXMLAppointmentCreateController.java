@@ -60,20 +60,37 @@ public class FXMLAppointmentCreateController implements Initializable {
         LocalDateTime startDateTime = LocalDateTime.parse(start.getText());
         LocalDateTime endDateTime = LocalDateTime.parse(end.getText());
 
-        DBAppointment.create(
-            getSelectedCustomer().getCustomerId(),
-            1,
-            title.getText(),
-            description.getText(),
-            location.getText(),
-            contact.getText(),
-            type.getText(),
-            url.getText(),
-            Timestamp.valueOf( startDateTime ),
-            Timestamp.valueOf( endDateTime )
-        );
+        boolean isWithinBusinessHours = ScheduleValidator.isWithinBusinessHours(startDateTime, endDateTime);
+        boolean hasOverlappingAppointments = ScheduleValidator.hasOverlappingAppointments(startDateTime, endDateTime);
 
-        SceneLoader.loadManagement();
+        if ( ! isWithinBusinessHours ){
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("Appointment is not within business hours.");
+
+            alert.showAndWait();
+        } else if ( hasOverlappingAppointments ) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("Schedule conflict with another appointment.");
+
+            alert.showAndWait();
+        } else {
+            DBAppointment.create(
+                getSelectedCustomer().getCustomerId(),
+                1,
+                title.getText(),
+                description.getText(),
+                location.getText(),
+                contact.getText(),
+                type.getText(),
+                url.getText(),
+                Timestamp.valueOf( startDateTime ),
+                Timestamp.valueOf( endDateTime )
+            );
+    
+            SceneLoader.loadManagement();
+        }
     }
 
     @FXML

@@ -57,6 +57,28 @@ public class DBAppointment {
         return rs;
     }
 
+    public static ResultSet getBetweenDateRange(Timestamp start, Timestamp end){
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = DatabaseQuery.prepare(
+                "SELECT * FROM appointment WHERE (start BETWEEN ? AND ?) OR (end BETWEEN ? AND ?)"
+            );
+
+            ps.setTimestamp(1, start);
+            ps.setTimestamp(2, end);
+            ps.setTimestamp(3, start);
+            ps.setTimestamp(4, end);
+            rs = ps.executeQuery();
+            rs.first();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return rs;
+    }
+
     public static int create(int customerId, int userId, String title, String description, String location, String contact, String type, String url, Timestamp start, Timestamp end ) {
         int id = 0;
 
