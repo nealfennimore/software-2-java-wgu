@@ -10,7 +10,9 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -64,8 +66,8 @@ public class FXMLManagementController implements Initializable {
         customers.setItems(items);
     }
 
-    private void renderAppointments() throws SQLException {
-        ObservableList items = AppointmentList.getTabulated();
+    private void renderAppointments(ObservableList list) throws SQLException {
+        ObservableList items = list == null ? AppointmentList.getTabulated() : list;
         appointments.setItems(items);
     }
 
@@ -137,10 +139,26 @@ public class FXMLManagementController implements Initializable {
                 throw new Exception("No appointment");
             }
             DBAppointment.delete(appontment.getAppointmentId());
-            renderAppointments();
+            renderAppointments(null);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @FXML
+    private void handleDisplayMonth(ActionEvent event) throws SQLException{
+        LocalDateTime startDateTime = LocalDateTime.now().with(TemporalAdjusters.firstDayOfMonth());
+        LocalDateTime endDateTime = startDateTime.with(TemporalAdjusters.lastDayOfMonth());
+        ObservableList items = AppointmentList.getTabulatedByDateRange(Timestamp.valueOf(startDateTime), Timestamp.valueOf(endDateTime));
+        renderAppointments(items);
+    }
+
+    @FXML
+    private void handleDisplayWeek(ActionEvent event) throws SQLException{
+        LocalDateTime startDateTime = LocalDateTime.now().with(TemporalAdjusters.previous( DayOfWeek.MONDAY ) );
+        LocalDateTime endDateTime = startDateTime.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+        ObservableList items = AppointmentList.getTabulatedByDateRange(Timestamp.valueOf(startDateTime), Timestamp.valueOf(endDateTime));
+        renderAppointments(items);
     }
 
     /**
@@ -156,7 +174,7 @@ public class FXMLManagementController implements Initializable {
         end.setCellValueFactory(new PropertyValueFactory<>("end"));
         try {
             renderCustomers();
-            renderAppointments();
+            renderAppointments(null);
         } catch (SQLException ex) {
             Logger.getLogger(FXMLManagementController.class.getName()).log(Level.SEVERE, null, ex);
         }

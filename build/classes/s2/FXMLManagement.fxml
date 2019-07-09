@@ -40,6 +40,12 @@
         </bottom>
     </BorderPane>
     <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <top>
+            <HBox spacing="10" alignment="top_left"> 
+                <Button text="Display Current Month" onAction="#handleDisplayMonth" />
+                <Button text="Display Current Week" onAction="#handleDisplayWeek" />
+            </HBox>
+        </top>
         <center>
             <TableView fx:id="appointments">
                 <columns>
