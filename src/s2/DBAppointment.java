@@ -77,6 +77,24 @@ public class DBAppointment {
         return rs;
     }
 
+    public static ResultSet getAppointmentsByConsultant(){
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = DatabaseQuery.prepare(
+                "SELECT * FROM appointment ORDER BY customerId ASC, start ASC"
+            );
+
+            rs = ps.executeQuery();
+            rs.first();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return rs;
+    }
+
     public static ResultSet getBetweenDateRange(Timestamp start, Timestamp end){
         ResultSet rs = null;
 

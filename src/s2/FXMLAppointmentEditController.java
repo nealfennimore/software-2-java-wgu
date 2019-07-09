@@ -80,7 +80,8 @@ public class FXMLAppointmentEditController implements Initializable {
         LocalDateTime endDateTime = Timestamp.valueOf( end.getText() ).toLocalDateTime();
 
         boolean isWithinBusinessHours = ScheduleValidator.isWithinBusinessHours(startDateTime, endDateTime);
-        boolean hasOverlappingAppointments = ScheduleValidator.hasOverlappingAppointments(startDateTime, endDateTime);
+        boolean hasOverlappingAppointments = ScheduleValidator.hasOverlappingAppointments(startDateTime, endDateTime, 
+                appointment.getAppointmentId());
 
         if ( ! isWithinBusinessHours ){
             Alert alert = new Alert(AlertType.WARNING);

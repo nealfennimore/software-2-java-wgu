@@ -61,7 +61,7 @@ public class FXMLAppointmentCreateController implements Initializable {
         LocalDateTime endDateTime = LocalDateTime.parse(end.getText());
 
         boolean isWithinBusinessHours = ScheduleValidator.isWithinBusinessHours(startDateTime, endDateTime);
-        boolean hasOverlappingAppointments = ScheduleValidator.hasOverlappingAppointments(startDateTime, endDateTime);
+        boolean hasOverlappingAppointments = ScheduleValidator.hasOverlappingAppointments(startDateTime, endDateTime, -1);
 
         if ( ! isWithinBusinessHours ){
             Alert alert = new Alert(AlertType.WARNING);

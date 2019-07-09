@@ -65,4 +65,11 @@ public class AppointmentList {
 
         return FXCollections.observableArrayList(appointments);
     }
+
+    public static ObservableList getAppointmentsByConsultant() throws SQLException {
+        ResultSet rs = DBAppointment.getAppointmentsByConsultant();
+        ArrayList<Appointment> appointments = new ArrayList<>();
+        AppointmentList.getAppointments(rs, appointments);
+        return FXCollections.observableArrayList(appointments);
+    }
 }
