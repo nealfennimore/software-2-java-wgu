@@ -48,24 +48,40 @@ public class FXMLCustomerEditController implements Initializable {
         Customer customer = StateManager.getActiveCustomer();
         Address customerAddress = customer.getAddress();
         int addressId = customerAddress.getAddressId();
-
-
-        int countryId = DBCountry.createOrSelect(country.getText());
-        int cityId = DBCity.createOrSelect(city.getText(), countryId);
-        DBAddress.update(
-            addressId,
+          
+        boolean isValid = CustomerValidator.validate(
+            customerName.getText(),
             address.getText(),
             address2.getText(),
-            cityId,
+            city.getText(),
+            country.getText(),
             postalCode.getText(),
             phone.getText()
         );
-        DBCustomer.update(
-            customer.getCustomerId(),
-            customerName.getText(),
-            addressId
-        );
-        SceneLoader.loadManagement();
+
+        if (isValid) {
+            int countryId = DBCountry.createOrSelect(country.getText());
+            int cityId = DBCity.createOrSelect(city.getText(), countryId);
+            DBAddress.update(
+                addressId,
+                address.getText(),
+                address2.getText(),
+                cityId,
+                postalCode.getText(),
+                phone.getText()
+            );
+            DBCustomer.update(
+                customer.getCustomerId(),
+                customerName.getText(),
+                addressId
+            );
+            SceneLoader.loadManagement();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("INVALID");
+            alert.setContentText("Invalid customer input.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
