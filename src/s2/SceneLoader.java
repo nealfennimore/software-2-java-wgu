@@ -50,4 +50,19 @@ public class SceneLoader {
     public static void loadAppointmentEdit() throws IOException {
         load("FXMLAppointmentEdit.fxml");
     }
+
+    @FXML
+    public static void loadReportAppointmentTypes() throws IOException {
+        load("FXMLReportAppointmentTypes.fxml");
+    }
+
+    @FXML
+    public static void loadReportConsultantSchedule() throws IOException {
+        load("FXMLReportConsultantSchedule.fxml");
+    }
+
+    @FXML
+    public static void loadReportAllAppointments() throws IOException {
+        load("FXMLReportAllAppointments.fxml");
+    }
 }

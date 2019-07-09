@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<GridPane 
+   fx:controller="s2.FXMLReportAllAppointmentsController" xmlns:fx="http://javafx.com/fxml/1" 
+   alignment="CENTER" hgap="10" vgap="10"> 
+    <padding>
+    </padding>
+    
+    <Label text="Report All Appointments"                
+        GridPane.columnIndex="0" GridPane.rowIndex="0">
+    </Label>
+    <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <center>
+            <VBox spacing="10" alignment="top_right"> 
+                <Button text="Report Appointment Types" onAction="#handleReportAppointmentTypes" />
+                <Button text="Report Consultants" onAction="#handleReportConsultantSchedule" />
+                <Button text="Back to Management" onAction="#handleManagement" />
+            </VBox>
+        </center>
+    </BorderPane>
+    <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <center>
+            <TableView fx:id="appointments">
+                <columns>
+                    <TableColumn text="Appointment" fx:id="title">
+                    </TableColumn>
+                    <TableColumn text="Start" fx:id="start"> 
+                    </TableColumn>
+                    <TableColumn text="End" fx:id="end"> 
+                    </TableColumn>
+               </columns> 
+            </TableView>
+        </center>
+    </BorderPane>
+</GridPane>

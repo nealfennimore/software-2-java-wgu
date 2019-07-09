@@ -161,6 +161,21 @@ public class FXMLManagementController implements Initializable {
         renderAppointments(items);
     }
 
+    @FXML
+    private void handleReportAppointmentTypes(ActionEvent event) throws IOException {
+        SceneLoader.loadReportAppointmentTypes();
+    }
+
+    @FXML
+    private void handleReportConsultantSchedule(ActionEvent event) throws IOException {
+        SceneLoader.loadReportConsultantSchedule();
+    }
+
+    @FXML
+    private void handleReportAllAppointments(ActionEvent event) throws IOException {
+        SceneLoader.loadReportAllAppointments();
+    }
+
     /**
      * Initializes the controller class.
      */

@@ -57,6 +57,26 @@ public class DBAppointment {
         return rs;
     }
 
+    public static ResultSet getAppointmentTypeCountsByDateRange(Timestamp start, Timestamp end){
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = DatabaseQuery.prepare(
+                "SELECT *, COUNT(*) AS typeCount FROM appointment WHERE start >= ? AND end <= ? GROUP BY type"
+            );
+
+            ps.setTimestamp(1, start);
+            ps.setTimestamp(2, end);
+            rs = ps.executeQuery();
+            rs.first();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return rs;
+    }
+
     public static ResultSet getBetweenDateRange(Timestamp start, Timestamp end){
         ResultSet rs = null;
 

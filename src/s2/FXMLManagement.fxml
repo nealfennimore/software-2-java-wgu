@@ -20,6 +20,15 @@
     </Label>
     <BorderPane GridPane.columnIndex="0" GridPane.rowIndex="1">
         <center>
+            <VBox spacing="10" alignment="top_right"> 
+                <Button text="Report All Appointments" onAction="#handleReportAllAppointments" />
+                <Button text="Report Appointment Types" onAction="#handleReportAppointmentTypes" />
+                <Button text="Report Consultants" onAction="#handleReportConsultantSchedule" />
+            </VBox>
+        </center>
+    </BorderPane>
+    <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <center>
             <TableView fx:id="customers">
                 <columns>
                     <TableColumn text="Customer ID" fx:id="customerId">
@@ -39,7 +48,7 @@
             </HBox>
         </bottom>
     </BorderPane>
-    <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="1">
         <top>
             <HBox spacing="10" alignment="top_left"> 
                 <Button text="Display Current Month" onAction="#handleDisplayMonth" />

@@ -27,6 +27,7 @@ public class Appointment {
     private Timestamp end;
     private Customer customer;
     private User user;
+    private int typeCount;
 
     public Appointment() throws SQLException {
         this(0, 0, 0, "", "", "", "", "", "", new Timestamp(System.currentTimeMillis()), 
@@ -245,5 +246,19 @@ public class Appointment {
      */
     public void setUser(User user) {
         this.user = user;
+    }
+
+    /**
+     * @return the typeCount
+     */
+    public int getTypeCount() {
+        return typeCount;
+    }
+
+    /**
+     * @param typeCount the typeCount to set
+     */
+    public void setTypeCount(int typeCount) {
+        this.typeCount = typeCount;
     }
 }
