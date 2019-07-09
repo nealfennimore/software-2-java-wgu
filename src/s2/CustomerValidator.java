@@ -34,6 +34,8 @@ public class CustomerValidator {
         map.put("phone", phone);
 
 
+        // Use lambdas in order to filter out unused keys and values
+        // therefore allowing reuse of same parameters
         Map<String, String> emptyStringCollection = map.entrySet()
             .stream()
             .filter(m -> ! "address2".equals(m.getKey()) ) // Filter out address2 as it can be empty
@@ -44,13 +46,13 @@ public class CustomerValidator {
             return false;
         }
 
+        // Use lambdas in order to filter out unused keys and values
+        // therefore allowing reuse of same parameters
         Map<String, String> hasAlphaCharacters = map.entrySet()
             .stream()
             .filter( m -> "postalCode".equals(m.getKey()) || "phone".equals(m.getKey()) )
             .filter( m -> m.getValue().matches("[a-zA-Z]+"))
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-        System.out.println(hasAlphaCharacters);
 
         if (!hasAlphaCharacters.isEmpty()) {
             return false;
