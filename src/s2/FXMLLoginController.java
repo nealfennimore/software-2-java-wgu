@@ -22,6 +22,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;   
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -32,6 +34,10 @@ public class FXMLLoginController implements Initializable {
 
     @FXML TextField userName;
     @FXML TextField password;
+    @FXML Button loginButton;
+    @FXML Label loginLabel;
+    @FXML Label userNameLabel;
+    @FXML Label passwordLabel;
 
     private void alertBadLogin() {
         try {
@@ -78,7 +84,7 @@ public class FXMLLoginController implements Initializable {
     private void handleAppointmentWithin15Minutes() {
         LocalDateTime startDate = LocalDateTime.now();
         LocalDateTime endDate = startDate.plusMinutes(15);
-        ResultSet rs = DBAppointment.getByDateRange(Timestamp.valueOf(startDate), Timestamp.valueOf(endDate));
+        ResultSet rs = DBAppointment.getBetweenDateRange(Timestamp.valueOf(startDate), Timestamp.valueOf(endDate));
 
         try {
             if (rs.first()) {
@@ -132,6 +138,9 @@ public class FXMLLoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        loginButton.setText(S2_i18n.getString("login"));
+        loginLabel.setText(S2_i18n.getString("login"));
+        passwordLabel.setText(S2_i18n.getString("password"));
+        userNameLabel.setText(S2_i18n.getString("username"));
     }
 }

@@ -5,6 +5,9 @@
  */
 package s2;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author neal
@@ -12,5 +15,13 @@ package s2;
 public class Utils {
     public static boolean isEmptyString(String str) {
         return str == null || str.isEmpty();
+    }
+
+    public static Timestamp toTimestamp(LocalDateTime date) {
+        return Timestamp.valueOf(date);
+    }
+
+    public static LocalDateTime toLocalDateTime(Timestamp date) {
+        return date.toLocalDateTime();
     }
 }

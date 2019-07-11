@@ -19,12 +19,12 @@ public class S2 extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        S2_i18n.setup();
+
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
         
         Scene scene = new Scene(root);
         SceneController.setMain(scene);
-
-        S2_i18n.setup();
 
         Database.setup();
         DatabaseSeeder.seed();

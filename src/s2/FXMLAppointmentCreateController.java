@@ -132,7 +132,7 @@ public class FXMLAppointmentCreateController implements Initializable {
             customers.getItems().setAll(CustomerList.getTabulated());
             customers.getSelectionModel().selectFirst();
             start.setText( LocalDateTime.now().toString() );
-            end.setText( LocalDateTime.now().plusDays(1).toString() );
+            end.setText( LocalDateTime.now().plusMinutes(15).toString() );
         } catch (SQLException ex) {
             Logger.getLogger(FXMLAppointmentCreateController.class.getName()).log(Level.SEVERE, null, ex);
         }
