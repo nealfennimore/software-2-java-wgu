@@ -7,6 +7,9 @@ package s2;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 /**
  *
@@ -22,6 +25,9 @@ public class Utils {
     }
 
     public static LocalDateTime toLocalDateTime(Timestamp date) {
-        return date.toLocalDateTime();
+        LocalDateTime local = date.toLocalDateTime();
+        ZonedDateTime utcZone = ZonedDateTime.of(local, ZoneOffset.UTC);
+        ZonedDateTime localZone = utcZone.withZoneSameInstant(ZoneId.systemDefault());
+        return localZone.toLocalDateTime();
     }
 }

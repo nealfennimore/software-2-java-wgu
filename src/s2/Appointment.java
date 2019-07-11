@@ -6,8 +6,10 @@
 package s2;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.TimeZone;
 
 /**
  *
@@ -23,8 +25,8 @@ public class Appointment {
     private String contact;
     private String type;
     private String url;
-    private Timestamp start;
-    private Timestamp end;
+    private LocalDateTime start;
+    private LocalDateTime end;
     private Customer customer;
     private User user;
     private int typeCount;
@@ -44,8 +46,8 @@ public class Appointment {
         this.contact = contact;
         this.type = type;
         this.url = url;
-        this.start = start;
-        this.end = end;
+        this.start = Utils.toLocalDateTime(start);
+        this.end = Utils.toLocalDateTime(end);
 
         ResultSet rs = DBCustomer.get(customerId);
         Customer customer = new Customer(
@@ -196,27 +198,27 @@ public class Appointment {
     /**
      * @return the start
      */
-    public Timestamp getStart() {
+    public LocalDateTime getStart() {
         return start;
     }
 
     /**
      * @param start the start to set
      */
-    public void setStart(Timestamp start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
     /**
      * @return the end
      */
-    public Timestamp getEnd() {
+    public LocalDateTime getEnd() {
         return end;
     }
     /**
      * @param end the end to set
      */
-    public void setEnd(Timestamp end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 
